@@ -7,6 +7,8 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+    volumes:
+      - ./data/db/toolkit.sql:/docker-entrypoint-initdb.d/toolkit.sql
   backend:
     build: 
       context: .
@@ -24,13 +26,3 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
-  # frontend:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.frontend
-  #   ports:
-  #     - "9091:9091"
-  #   volumes:
-  #     - .:/src
-  #   depends_on:
-  #     - backend

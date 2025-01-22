@@ -1,7 +1,6 @@
 # flake8: noqa
 from toolkit.settings_shared import *
 from ctlsettings.docker import common
-import os
 
 locals().update(
     common(

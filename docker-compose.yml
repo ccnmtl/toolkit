@@ -24,13 +24,3 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
-  # frontend:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.frontend
-  #   ports:
-  #     - "9091:9091"
-  #   volumes:
-  #     - .:/src
-  #   depends_on:
-  #     - backend
