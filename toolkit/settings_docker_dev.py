@@ -1,8 +1,6 @@
-import os
 from toolkit.settings_shared import *  # noqa: F401,F403
+import os
 
-
-# docker-compose db container
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -12,8 +10,9 @@ DATABASES = {
         # 'HOST': 'host.docker.internal',
         # # use this for Mac and Windows when the Postgres
         # is running in another Docker container outside the network
-        'HOST': 'db',  # use this for Linux when the Postgres is running
-                       # in another Docker container inside the network
+        'HOST': 'db',
+        # use this for Linux when the Postgres is running
+        # in another Docker container inside the network
         'PORT': 5432,
     }
 }

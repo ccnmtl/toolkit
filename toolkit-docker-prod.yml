@@ -1,28 +1,28 @@
 services:
-  db:
-    image: postgres:15-alpine
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - JOBS_DB_HOST=${JOBS_DB_HOST}
-      - JOBS_DB_USER=${JOBS_DB_USER}
-      - JOBS_DB_PORT=${JOBS_DB_PORT}
-      - JOBS_DB_DB_NAME=${JOBS_DB_DB_NAME}
-      - JOBS_DB_PASSWORD=${JOBS_DB_PASSWORD}
-      - CONFIG_PATH=${CONFIG_PATH}
-    ports:
-      - "7432:5432"
   backend:
     build: 
       context: .
       dockerfile: Dockerfile.backend
     command: >
       sh -c "python manage.py migrate --noinput --settings=toolkit.settings_production &&
-             python manage.py runserver --settings=toolkit.settings_production 0.0.0.0:8090"
+             python manage.py runserver --settings=toolkit.settings_production 0.0.0.0:9968"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - JOBS_DB_HOST=${JOBS_DB_HOST}
+      - JOBS_DB_USER=${JOBS_DB_USER}
+      - JOBS_DB_PORT=${JOBS_DB_PORT}
+      - JOBS_DB_DB_NAME=${JOBS_DB_DB_NAME}
+      - JOBS_DB_PASSWORD=${JOBS_DB_PASSWORD}
+      - CONFIG_PATH=${CONFIG_PATH}
+      - SENTRY_DSN=${SENTRY_DSN}
+      - SENTRY_KEY=${SENTRY_KEY}
     volumes:
       - .:/src
-      - ./config:/config
+      - /var/log/django:/var/log/django
+      - ./media:/src/media
+      - ./static:/src/static
     logging:
       driver: "json-file"
       options:
@@ -31,5 +31,5 @@ services:
         mode: non-blocking
         tag: backend
     ports:
-      - "8090:8080"
+      - "9968:9968"
       

@@ -28,14 +28,16 @@ try {
         stage 'Checkout'
         checkout scm
         checkoutDir = pwd()
-        // jobsDbHost = getAwsParameter("/staging/postgresql/DATABASE_HOST")
-        jobsDbHost = 'db' // This is using docker compose for the postgres db container
+        jobsDbHost = getAwsParameter("/${env.ENV}/postgresql/DATABASE_HOST")
+        // jobsDbHost = 'db' // This is using docker compose for the postgres db container
         jobsDbUser = getAwsParameter("/${env.ENV}/toolkit/POSTGRES_USER")
         jobsDbPassword = getAwsParameter("/${env.ENV}/toolkit/POSTGRES_PASSWORD")
-        // jobsDbPort = getAwsParameter("/staging/posgresql/DATABASE_PORT")
-        jobsDbPort = 5432 // This is using docker compose for the postgres db container
+        jobsDbPort = 5432
+        // jobsDbPort = 7432 // This is using docker compose for the postgres db container
         // jobsDbDbName = getAwsParameter("/${env.ENV}/toolkit/JOBS_DB_NAME")
-        jobsDbDbName = 'jobsdb' // This is using docker compose for the postgres db container
+        jobsDbDbName = 'toolkit' // This is using docker compose for the postgres db container
+        SENTRY_DSN = getAwsParameter("/${env.ENV}/toolkit/SENTRY_DSN")
+        SENTRY_KEY = getAwsParameter("/${env.ENV}/toolkit/SENTRY_KEY")
     }
 
     node {
@@ -52,6 +54,8 @@ try {
             echo JOBS_DB_DB_NAME=${jobsDbDbName} >> .env
             echo JOBS_DB_PORT=${jobsDbPort} >> .env
             echo CONFIG_PATH=${env.CONFIG_PATH} >> .env
+            echo SENTRY_DSN=${SENTRY_DSN} >> .env
+            echo SENTRY_KEY=${SENTRY_KEY} >> .env
         """
     }
 

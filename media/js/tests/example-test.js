@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 
 var assert = require('assert');
-var requirejs = require('requirejs');
 
 describe('Array', function() {
     describe('#indexOf()', function() {
@@ -13,7 +12,7 @@ describe('Array', function() {
 });
 
 describe('utils', function() {
-    var utils = requirejs('../src/utils');
+    
     describe('#isEven()', function() {
         it('should return true when given even numbers', function() {
             assert.equal(utils.isEven(2), true);
