@@ -1,4 +1,3 @@
-# from ctlsettings.shared import *
 from ctlsettings.production import common, init_sentry
 from toolkit.settings_shared import *  # noqa: F403
 from django.conf import settings
