@@ -20,8 +20,8 @@ RUN rm -rf local_settings.py
 
 COPY ["package*.json","./"]
 
-RUN npm install
-RUN npm run build:prod
+# RUN npm install
+# RUN npm run build:prod
 EXPOSE 8000
 RUN chmod u+x entrypoint.sh
 
