@@ -1,0 +1,9 @@
+venv
+data
+.python-version
+.env
+.git
+.cache
+__pycache__
+.gitignore
+local_settings.py

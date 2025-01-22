@@ -2,15 +2,26 @@
   "name": "toolkit",
   "version": "0.1.0",
   "description": "toolkit",
-  "license": "GPL-2.0+",
+  "license": "GPL-3.0+",
   "scripts": {
-    "test": "mocha"
+    "eslint": "eslint --ext .js,.jsx src/",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccnmtl/toolkit.git"
   },
   "devDependencies": {
     "eslint": "~9.18.0",
     "eslint-plugin-security": "~3.0.0",
-    "mocha": "~11.0.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "mini-css-extract-plugin": "^2.7.6",
     "requirejs": "~2.3.2",
     "sinon": "~19.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
   }
 }

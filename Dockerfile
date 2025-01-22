@@ -1,23 +1,28 @@
-FROM ccnmtl/django.base
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+FROM public.ecr.aws/docker/library/python:3.11.3-bullseye@sha256:13927a8172d13b6cdc87f50bf0a38ff4eceef05262f83870c9f6474d16117687
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /src
+COPY requirements.txt .
 
-# install node stuff
-COPY package.json /node/
-RUN cd /node && npm install && touch /node/node_modules/sentinal
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n && \
+    bash n 20.17.0 && \
+    apt-get clean
 
-# build virtualenv and run tests
-ADD wheelhouse /wheelhouse
-RUN /ve/bin/pip install --no-index -f /wheelhouse -r /wheelhouse/requirements.txt \
-    && rm -rf /wheelhouse && touch /ve/sentinal
-WORKDIR /app
-COPY . /app/
-RUN VE=/ve/ MANAGE="/ve/bin/python manage.py" NODE_MODULES=/node/node_modules/ make
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --no-deps -r requirements.txt
+COPY . .
+
+RUN rm -rf local_settings.py
+
+COPY ["package*.json","./"]
+
+RUN npm install
+RUN npm run build:prod
 EXPOSE 8000
-ADD docker-run.sh /run.sh
-ENV APP toolkit
-ENTRYPOINT ["/run.sh"]
-CMD ["run"]
+RUN chmod u+x entrypoint.sh
+
+CMD ["./entrypoint.sh"]

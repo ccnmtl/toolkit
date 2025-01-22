@@ -1,0 +1,29 @@
+JobsDB:
+  jobDoneMigrateThres: 0.8
+  jobStatusMigrateThres: 5
+  maxDSSize: 100000
+  maxMigrateOnce: 10
+  maxMigrateDSProbe: 10
+  maxTableSizeInMB: 300
+  migrateDSLoopSleepDuration: 30s
+  addNewDSLoopSleepDuration: 5s
+  refreshDSListLoopSleepDuration: 5s
+  backupCheckSleepDuration: 5s
+  backupRowsBatchSize: 1000
+  archivalTimeInDays: 10
+  archiverTickerTime: 1440m
+  # maxOpenConnections: 5
+  backup:
+    enabled: true
+    gw:
+      enabled: true
+      pathPrefix: ""
+    rt:
+      enabled: true
+      failedOnly: true
+    batch_rt:
+      enabled: false
+      failedOnly: false
+  gw:
+    enableWriterQueue: false
+    maxOpenConnections: 64

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markdownify %}
 
 {% block title %}{{ flatpage.title }}{% endblock %}
 
@@ -9,5 +8,5 @@
 {% endblock %}
 
 {% block content %}
-{{ flatpage.content|markdownify}}
+{{ flatpage.content}}
 {% endblock %}

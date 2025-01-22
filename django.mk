@@ -86,19 +86,4 @@ pull:
 	make migrate
 	make flake8
 
-rebase:
-	git pull --rebase
-	make check
-	make test
-	make migrate
-	make flake8
-
-# run this one the very first time you check
-# this out on a new machine to set up dev
-# database, etc. You probably *DON'T* want
-# to run it after that, though.
-install: jenkins
-	createdb $(APP)
-	make migrate
-
 .PHONY: jenkins test flake8 runserver migrate check shell clean pull rebase install

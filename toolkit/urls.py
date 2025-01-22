@@ -9,6 +9,11 @@ from toolkit.main import views
 admin.autodiscover()
 
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+    return division_by_zero
+
+
 urlpatterns = [
     path('', views.IndexView.as_view()),
     path('admin/', admin.site.urls),
@@ -22,9 +27,9 @@ urlpatterns = [
     path('_impersonate/', include('impersonate.urls')),
     path('stats/', TemplateView.as_view(template_name="stats.html")),
     path('smoketest/', include('smoketest.urls')),
-    path('infranil/', include('infranil.urls')),
     path('uploads/<str:path>',
-        serve, {'document_root': settings.MEDIA_ROOT}),
+         serve, {'document_root': settings.MEDIA_ROOT}),
+    path('sentry-debug/', trigger_error),
 ]
 
 

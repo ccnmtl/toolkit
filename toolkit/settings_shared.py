@@ -14,13 +14,11 @@ PROJECT_APPS = [
 USE_TZ = True
 
 INSTALLED_APPS += [  # noqa
-    'django_cas_ng',
-    'bootstrap4',
-    'infranil',
+    'django_bootstrap5',
     'django_extensions',
-    'markdownify.apps.MarkdownifyConfig',
-
+    'toolkit',
     'toolkit.main',
+    'contactus'
 ]
 
 THUMBNAIL_SUBDIR = "thumbs"
