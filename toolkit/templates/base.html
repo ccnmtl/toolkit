@@ -81,10 +81,7 @@
     <div class="collapse navbar-collapse" id="topNavbar">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/" title="Home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" title="Link">Link</a>
+                <a class="nav-link" href="{% url 'aboelela' %}" title="Aboelela">Aboelela</a>
             </li>
         </ul>
     </div>
@@ -120,12 +117,12 @@
 
 <main role="main" class="pb-4">
 
+{% if request.user.is_anonymous %}
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">Banner placeholder</h1>
             <!-- Login modal -->
 {% block loginbox %}
-{% if request.user.is_anonymous %}
             <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#loginmodal">
               Log in
             </button>
@@ -187,8 +184,8 @@
                 </div>
               </div>
             </div>
-{% endif %}
 {% endblock %}
+{% endif %}
 
         </div>
     </section>

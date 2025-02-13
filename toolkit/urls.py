@@ -30,6 +30,9 @@ urlpatterns = [
     path('uploads/<str:path>',
          serve, {'document_root': settings.MEDIA_ROOT}),
     path('sentry-debug/', trigger_error),
+    path('aboelela/', views.AboelelaView.as_view(),
+         name='aboelela'),
+    path("", include("django.contrib.flatpages.urls")),
     re_path('^contact/', include('contactus.urls')),
 ]
 
