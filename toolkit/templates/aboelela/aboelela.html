@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Aboelela{% endblock %}
+
+{% block pagetitle %}
+    <h1>Gen AI to Reduce Learning Gaps in Nursing Students</h1>
+{% endblock %}
+
+{% block content %}
+<section id="about">
+    <h2>About</h2>
+    <p>
+        This data processor was developed for Dr. Sally Aboelela to prepare
+        data to be fed into a Generative AI designed to create study guides for
+        students that have failed an exam and are preparing for a retake.
+    </p>
+</section>
+<section id="processor">
+    <h2>Procedure</h2>
+    <ol id="instructions">
+        <li>
+            From Examsoft, download the <em>Results</em> and <em>Items</em> data
+            as .csv files. See Professor Aboelela for how to format the downloads.
+        </li>
+        <li>
+            Add both of the files below, then hit submit.
+        </li>
+        <li>
+            Assuming no error has occurred a file should automatically download with the processed data.
+        </li>
+    </ol>
+    <h2>File Submission</h2>
+    <form enctype="multipart/form-data" method="POST">
+        {{form}}
+        <input type="submit" value="Process the files" />
+    </form>
+</section>
+{% endblock %}
