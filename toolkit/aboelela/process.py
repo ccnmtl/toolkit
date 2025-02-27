@@ -106,8 +106,13 @@ def sanitizeItems(file):
     return clean, count
 
 
-def process(files):
+def get_file_ref(files: list) -> dict:
+    """
+    Given a list of files, do some data sanitization. Returns a
+    dictionary containing data about the files.
+    """
     file_ref = {}
+
     for file in files:
         name = file.name
         print(f' -- Sanitizing {name}...')
@@ -119,6 +124,13 @@ def process(files):
         elif 'item' in name.lower():
             file_ref['items'] = file
             sanitize(lambda x: x[x.find('Item #'):], file)
+
+    return file_ref
+
+
+def process(files):
+    file_ref = get_file_ref(files)
+
     # Sanitize Item data
     items, cat_count = sanitizeItems(file_ref['items'])
     print('Number of Questions:', len(items))
