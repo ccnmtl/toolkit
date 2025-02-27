@@ -1,4 +1,5 @@
 # Django settings for toolkit project.
+import sys
 import os.path
 from ctlsettings.shared import common
 
@@ -42,3 +43,20 @@ LOGIN_REDIRECT_URL = "/"
 
 ACCOUNT_ACTIVATION_DAYS = 7
 CONTACT_US_EMAIL = "ctl-admin@columbia.edu"
+
+if 'test' in sys.argv or 'jenkins' in sys.argv:
+    # GitHub Actions needs a slightly different postgres config
+    # than local dev / jenkins.
+    GITHUB = os.environ.get('GITHUB')
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': project,
+            'HOST': 'localhost' if GITHUB else '',
+            'PORT': 5432,
+            'USER': 'postgres' if GITHUB else '',
+            'PASSWORD': 'postgres' if GITHUB else '',
+            'ATOMIC_REQUESTS': True,
+        }
+    }
