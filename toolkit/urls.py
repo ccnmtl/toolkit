@@ -32,8 +32,8 @@ urlpatterns = [
     path('sentry-debug/', trigger_error),
     path('aboelela/', views.AboelelaView.as_view(),
          name='aboelela'),
-    path("", include("django.contrib.flatpages.urls")),
     re_path('^contact/', include('contactus.urls')),
+    path("", include("django.contrib.flatpages.urls")),
 ]
 
 
