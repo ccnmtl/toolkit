@@ -149,8 +149,8 @@ def accumulator(processed, results, items, item_dir, cat_count, verbose):
     Collects processed data in the output file.
     """
     # Write the header
-    header = ['UNI (ID)', 'Category', 'Max Score', 'Student Score',
-              '% Correct']
+    header = ['UNI (ID)', 'Bloom Level', 'Category', 'Max Score',
+              'Student Score', '% Correct']
     writer = csv.DictWriter(processed, fieldnames=header)
     writer.writeheader()
 
@@ -177,8 +177,10 @@ def accumulator(processed, results, items, item_dir, cat_count, verbose):
 
             # Write the row to the file
             for category in categories:
+                [bloom, topic] = category.split(', ')
                 out_data['UNI (ID)'] = row['UNI (ID)']
-                out_data['Category'] = category
+                out_data['Bloom Level'] = bloom
+                out_data['Category'] = topic
                 out_data['Max Score'] = cat_count[category]
                 out_data['Student Score'] = categories[category]
                 percentage = int(
