@@ -42,6 +42,6 @@ class AboelelaTest(TestCase):
         processed.open('r')
         # [:-2] to slice off the \r\n characters
         headers = processed.readline()[:-2]
-        target = ','.join(['UNI (ID)', 'Category', 'Max Score',
+        target = ','.join(['UNI (ID)', 'Bloom Level', 'Category', 'Max Score',
                            'Student Score', '% Correct'])
         self.assertEqual(headers, target)
