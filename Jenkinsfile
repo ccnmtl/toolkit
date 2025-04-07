@@ -38,9 +38,6 @@ try {
         jobsDbDbName = 'toolkit' // This is using docker compose for the postgres db container
         SENTRY_DSN = getAwsParameter("/${env.ENV}/toolkit/SENTRY_DSN")
         SENTRY_KEY = getAwsParameter("/${env.ENV}/toolkit/SENTRY_KEY")
-    }
-
-    node {
         stage 'Generate .env file'
         sh """
             echo TAG=${env.TAG} > .env
@@ -57,9 +54,6 @@ try {
             echo SENTRY_DSN=${SENTRY_DSN} >> .env
             echo SENTRY_KEY=${SENTRY_KEY} >> .env
         """
-    }
-
-    node {
         def branches = [:]
         stage "Copy files to host"
 
@@ -67,9 +61,6 @@ try {
             branches["copy-files-to-host-${i}"] = copy_files_to_host(i, server_hosts[i], checkoutDir)
         }
         parallel branches
-    }
-
-    node {
         stage "Restart Docker compose"
         def branches = [:]
         for (int i = 0; i < server_hosts.size(); i++) {
