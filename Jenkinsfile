@@ -62,7 +62,7 @@ try {
         }
         parallel branches
         stage "Restart Docker compose"
-        def branches = [:]
+        branches = [:]
         for (int i = 0; i < server_hosts.size(); i++) {
             branches["docker-compose-${i}"] = restart_docker_compose(i, server_hosts[i])
         }
