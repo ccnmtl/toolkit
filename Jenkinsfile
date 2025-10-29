@@ -24,7 +24,7 @@ def err = null
 currentBuild.result = "SUCCESS"
 
 try {
-    options {
+    checkoutOption {
         timeout(time:5, units: 'MINUTES')
     }
     node {
