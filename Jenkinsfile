@@ -25,8 +25,6 @@ currentBuild.result = "SUCCESS"
 
 try {
     node {
-        // Clean workspace before checkout to avoid git ref issues
-        deleteDir()
         stage 'Checkout'
         checkout scm
         checkoutDir = pwd()
