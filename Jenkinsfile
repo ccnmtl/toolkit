@@ -25,6 +25,9 @@ currentBuild.result = "SUCCESS"
 
 try {
     node {
+        options {
+            timeout(time:5, units: 'MINUTES')
+        }
         stage 'Checkout'
         checkout scm
         checkoutDir = pwd()
