@@ -24,10 +24,10 @@ def err = null
 currentBuild.result = "SUCCESS"
 
 try {
+    options {
+        timeout(time:5, units: 'MINUTES')
+    }
     node {
-        options {
-            timeout(time:5, units: 'MINUTES')
-        }
         stage 'Checkout'
         checkout scm
         checkoutDir = pwd()
