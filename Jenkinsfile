@@ -118,27 +118,21 @@ def notifyBuild(String buildStatus = 'STARTED') {
 }
 
 def copy_files_to_host(int i, String host, String checkoutDir) {
-    cmd = {
-        node {
-            sh """
-            scp -r ${checkoutDir}/.env ${host}:/var/www/${APP}/.env
-            scp -r ${checkoutDir}/* ${host}:/var/www/${APP}
-            """
-        }
+    return {
+        sh """
+        scp -r ${checkoutDir}/.env ${host}:/var/www/${APP}/.env
+        scp -r ${checkoutDir}/* ${host}:/var/www/${APP}
+        """
     }
-    return cmd
 }
 
 def restart_docker_compose(int i, String host) {
-    cmd = {
-        node {
-            sh """
-            ssh ${host} "cd /var/www/${APP} && docker compose -f toolkit-docker-${env.ENV}.yml down || true"
-            ssh ${host} "cd /var/www/${APP} && docker compose -f toolkit-docker-${env.ENV}.yml up -d"
-            """
-        }
+    return {
+        sh """
+        ssh ${host} "cd /var/www/${APP} && docker compose -f toolkit-docker-${env.ENV}.yml down || true"
+        ssh ${host} "cd /var/www/${APP} && docker compose -f toolkit-docker-${env.ENV}.yml up -d"
+        """
     }
-    return cmd
 }
 
 def getAwsParameter(String name) {
