@@ -1,7 +1,7 @@
 # Toolkit
 Managed by Columbia University's Center for Teaching and Learning to host various independent web tools for small projects that do not require their own infrastsructure.
 
-## Local Devlopment
+## Local Development
 ### Prerequisites
 * Docker
 * Git
@@ -22,7 +22,7 @@ Managed by Columbia University's Center for Teaching and Learning to host variou
 6. From your web browser you can now visit the site from `localhost:8000`.
 
 ## Staging and Production Development
-Environemnt variables are defined in Jenkinsfile lines [31:40]. In the base build parameters are stored in Amaozn Web Services and fetched into the environment variables. Access to the parameter store is stored in the Jenkins configuration.
+Environment variables are defined in Jenkinsfile lines [31:40]. In the base build parameters are stored in Amaozn Web Services and fetched into the environment variables. Access to the parameter store is stored in the Jenkins configuration.
 
 If you are not using AWS you will need to replace, at minimum, all of the lines that call `getAwsParameter()` with another secure parameter store. 
 
