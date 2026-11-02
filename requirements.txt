@@ -50,7 +50,7 @@ botocore
 python-dateutil==3.0.0
 
 python-cas==1.7.2
-django-cas-ng==5.1.1
+django-cas-ng==5.1.2
 django-indexer==0.3.0
 # django-templatetag-sugar==1.0
 # django-paging==0.2.5
